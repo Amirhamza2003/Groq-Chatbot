@@ -2,6 +2,10 @@ import streamlit as st
 from groq import Groq
 import json
 import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Inject custom CSS for dark theme, blue borders, and fancy input area
 st.markdown("""
@@ -118,7 +122,11 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Groq API details
-GROQ_API_KEY = "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"
+GROQ_API_KEY = os.getenv('GROQ_API_KEY')
+if not GROQ_API_KEY:
+    st.error("GROQ_API_KEY not found in environment variables!")
+    st.stop()
+
 MODEL = "meta-llama/llama-4-scout-17b-16e-instruct"
 
 client = Groq(api_key=GROQ_API_KEY)
@@ -136,6 +144,7 @@ def save_chat_history(messages):
         json.dump(messages, f)
 
 st.markdown('<div class="chat-title"><span class="icon"></span>Groq Chatbot</div>', unsafe_allow_html=True)
+
 
 # Initialize session state with chat history
 if "messages" not in st.session_state:
