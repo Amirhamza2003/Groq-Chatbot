@@ -143,7 +143,7 @@ def save_chat_history(messages):
     with open("chat_history.json", "w") as f:
         json.dump(messages, f)
 
-st.markdown('<div class="chat-title"><span class="icon"></span>Groq Chatbot</div>', unsafe_allow_html=True)
+st.markdown('<div class="chat-title"><span class="icon"></span>AMB Chatbot</div>', unsafe_allow_html=True)
 
 
 # Initialize session state with chat history
@@ -176,12 +176,12 @@ if prompt:
 for msg in st.session_state.messages:
     if msg["role"] == "user":
         st.markdown(
-            f'<div class="chat-bubble user-bubble">🧑‍💻 {msg["content"]}</div>',
+            f'<div class="chat-bubble user-bubble">{msg["content"]}</div>',
             unsafe_allow_html=True
         )
     else:
         st.markdown(
-            f'<div class="chat-bubble assistant-bubble">🤖 {msg["content"]}</div>',
+            f'<div class="chat-bubble assistant-bubble">{msg["content"]}</div>',
             unsafe_allow_html=True
         )
 
